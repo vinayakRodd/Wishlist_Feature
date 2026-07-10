@@ -1,26 +1,27 @@
 package com.example.Wishlist_Feature.service;
 
 import com.example.Wishlist_Feature.dto.BondScannerDto;
+import com.example.Wishlist_Feature.mapper.BondMapper;
 import com.example.Wishlist_Feature.model.Bond;
 import com.example.Wishlist_Feature.repository.BondRepository;
 import com.example.Wishlist_Feature.specification.BondSpecification;
 import com.example.Wishlist_Feature.utils.SortUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class BondService {
 
     private final BondRepository bondRepository;
-
-    public BondService(BondRepository bondRepository) {
-        this.bondRepository = bondRepository;
-    }
+    private final BondMapper bondMapper;
 
     public Page<BondScannerDto> getFilteredBonds(String rating, Double minYield, String frequency, String brand,
                                                  int page, int limit, String sortBy, String direction) {
@@ -37,7 +38,7 @@ public class BondService {
         }
 
         // 3. Database fetch (Filtering, Sorting, and Pagination happen in SQL!)
-        return bondRepository.findAll(spec, PageRequest.of(page, limit, sort)).map(BondScannerDto::fromEntity);
+        return bondRepository.findAll(spec, PageRequest.of(page, limit, sort)).map(bondMapper::toDto); // This handles the whole page automatically
     }
 
     public List<Bond> saveAllBonds(List<Bond> bonds) {

@@ -1,11 +1,17 @@
 package com.example.Wishlist_Feature.dto;
 
-import com.example.Wishlist_Feature.model.Bond;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder // Using Builder allows for clean object creation
 public class BondScannerDto {
 
     private String isin;
@@ -33,35 +39,4 @@ public class BondScannerDto {
     private BigDecimal totalInvestedISIN;
     private OffsetDateTime createdAt;
     private OffsetDateTime updatedAt;
-
-    // This method handles the mapping logic inside the DTO
-    public static BondScannerDto fromEntity(Bond bond) {
-        BondScannerDto dto = new BondScannerDto();
-        dto.setIsin(bond.getIsin());
-        dto.setIssuerId(bond.getIssuerId());
-        dto.setIssuerName(bond.getBrandName());
-        dto.setMinInvestmentAmount(bond.getMinInvestment());
-        dto.setMinUnit(bond.getMinUnit());
-        dto.setYield(bond.getYieldPct());
-        dto.setState(bond.getStatus());
-        dto.setRaisedUnit(bond.getRaisedUnit());
-        dto.setRaisedAmount(bond.getRaisedAmount());
-        dto.setDealSubType(bond.getDealSubType());
-        dto.setDealSubTypeName(bond.getDealSubTypeName());
-        dto.setStyling(bond.getStyling());
-        dto.setStylingType(bond.getStylingType());
-        dto.setPlatforms(bond.getPlatforms());
-        dto.setIsSoldout(bond.getIsSoldout());
-        dto.setTags(bond.getTags());
-        dto.setMaturityDate(bond.getMaturityDate());
-        dto.setRatings(bond.getCreditRating());
-        dto.setIssuerLogoUrl(bond.getIssuerLogoUrl());
-        dto.setPayoutFrequency(bond.getPayoutFrequency());
-        dto.setPrincipalAtMaturity(bond.getPrincipalAtMaturity());
-        dto.setWeight(bond.getWeight());
-        dto.setTotalInvestedISIN(bond.getTotalInvestedIsin());
-        dto.setCreatedAt(bond.getCreatedAt());
-        dto.setUpdatedAt(bond.getUpdatedAt());
-        return dto;
-    }
 }

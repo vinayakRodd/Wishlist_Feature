@@ -2,6 +2,7 @@ package com.example.Wishlist_Feature.service;
 
 import com.example.Wishlist_Feature.model.Wishlist;
 import com.example.Wishlist_Feature.repository.WishlistRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ReflectionUtils;
@@ -10,13 +11,10 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@RequiredArgsConstructor
 public class WishlistService {
 
     private final WishlistRepository repo;
-
-    public WishlistService(WishlistRepository repo) {
-        this.repo = repo;
-    }
 
     @Transactional
     public Wishlist create(Wishlist w) {
